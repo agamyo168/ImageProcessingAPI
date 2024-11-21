@@ -8,9 +8,10 @@
     "start": "node dist/app.js",
     "dev": "nodemon src/app.ts",
     "format": "prettier --config ./.prettierrc --write \"src/**/*.{ts,js}\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint  \"src/**/*.{ts,js}\"",
-    "lint:fix": "eslint  \"src/**/*.{ts,js}\" --fix"
+    "lint:fix": "eslint  \"src/**/*.{ts,js}\" --fix",
+    "jasmine": "jasmine",
+    "test": "npm run build && npm run jasmine"
   },
   "keywords": [],
   "author": "",
