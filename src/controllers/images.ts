@@ -28,17 +28,25 @@ const getImage = async (req: Request, res: Response, next: NextFunction) => {
     const isNotValidSize =
         Number(height) <= 0 ||
         Number(width) <= 0 ||
-        !Number.isInteger(height) ||
-        !Number.isInteger(width);
+        !Number.isInteger(Number(height)) ||
+        !Number.isInteger(Number(width));
 
-    if (isNotValidSize && isNotNumber)
+    if (isNotValidSize || isNotNumber)
         return next(
             new BadRequestError('Please provide positive integer numbers'),
         );
 
     const inputPath = join(imagesDir, filename_jpg);
     const outputPath = join(outDir, `${width} ${height} ${filename_jpg}`);
-    await imageResize(inputPath, outputPath, Number(width), Number(height));
+    //check if image already exists:
+    const isCached = await fileExistsByPath(
+        `${width} ${height} ${filename_jpg}`, //new filename
+        outDir,
+    );
+    if (!isCached) {
+        console.log('Is not cached');
+        await imageResize(inputPath, outputPath, Number(width), Number(height));
+    }
 
     res.status(StatusCodes.OK).sendFile(outputPath);
 };

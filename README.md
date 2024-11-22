@@ -38,6 +38,6 @@ TypeScript:
 -   [x] Test -> given bad height and width.
 -   [x] Error Handling Middleware.
 -   [x] Custom Errors.
--   [ ] Refactor imageResize function to return void.
+-   [x] Refactor imageResize function to return void.
 -   [ ] Caching an image.
 -   [ ] Validation Middleware
