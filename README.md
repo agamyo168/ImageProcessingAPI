@@ -39,5 +39,5 @@ TypeScript:
 -   [x] Error Handling Middleware.
 -   [x] Custom Errors.
 -   [x] Refactor imageResize function to return void.
--   [ ] Caching an image.
--   [ ] Validation Middleware
+-   [x] Caching an image.
+-   [x] Validation Middleware
