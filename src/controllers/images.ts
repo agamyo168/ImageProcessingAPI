@@ -1,9 +1,11 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { imageResize } from '../services/imageProcessingService';
 import { fileExistsByPath } from '../util/fileHandler';
+import BadRequestError from '../Errors/bad-request';
+import NotFoundError from '../Errors/not-found';
 
-const getImage = async (req: Request, res: Response) => {
+const getImage = async (req: Request, res: Response, next: NextFunction) => {
     const { width, height, filename } = req.query;
     if (!width || !height || !filename) {
         res.status(StatusCodes.BAD_REQUEST).json({
@@ -15,10 +17,7 @@ const getImage = async (req: Request, res: Response) => {
     const filename_jpg = filename + '.jpg';
     const isFound = await fileExistsByPath(filename_jpg);
     if (isFound === false) {
-        res.status(StatusCodes.NOT_FOUND).json({
-            error: "This image doesn't exist",
-        });
-        return;
+        return next(new NotFoundError('No Image'));
     }
 
     const outputPath = await imageResize(
@@ -27,10 +26,7 @@ const getImage = async (req: Request, res: Response) => {
         Number(height),
     );
     if (outputPath.startsWith('Error:')) {
-        res.status(StatusCodes.BAD_REQUEST).json({
-            error: outputPath,
-        });
-        return;
+        return next(new BadRequestError(outputPath));
     }
 
     //TODO: width or height are not a number.

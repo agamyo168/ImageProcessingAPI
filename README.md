@@ -25,7 +25,7 @@ TypeScript:
 
 [x] install dependencies
 [x] configs
-[x] imageProcessingService -> Basic -> Input filename, width, height Output -> string file location.
+[x] imageProcessingService: Input -> filename, width, height - Output -> string file location.
 [x] API endpoint -> /images?filename=name&width=w&height=h
 
 ### Refactoring, debugging and testing.
@@ -36,7 +36,7 @@ TypeScript:
 [x] Test -> given bad filename.
 [x] Test -> given height and width in negative numbers.
 [x] Test -> given bad height and width.
+[x] Error Handling Middleware
+[ ] Custom Errors
 [ ] Caching an image.
 [ ] Validation Middleware
-[ ] Custom Errors
-[ ] Error Handling Middleware
