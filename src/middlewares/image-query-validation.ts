@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { fileExistsByPath } from '../util/fileHandler';
-import NotFoundError from '../Errors/not-found';
-import BadRequestError from '../Errors/bad-request';
+import { BadRequestError, NotFoundError } from '../Errors';
 
 const imageQueryValidation = async (
     req: Request,
