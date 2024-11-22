@@ -1,11 +1,14 @@
 import { promises as fsPromises } from 'fs';
 import { join } from 'path';
 
-const folderPath = join(__dirname, '..', '..', 'public', 'images');
-
-const fileExistsByPath = async (fileName: string): Promise<boolean> => {
+const imagesPath = join(__dirname, '..', '..', 'public', 'images');
+const outDir = join(imagesPath, 'thumb');
+const fileExistsByPath = async (
+    fileName: string,
+    path: string = imagesPath,
+): Promise<boolean> => {
     try {
-        const filePath = join(folderPath, fileName);
+        const filePath = join(path, fileName);
 
         // Try accessing the file directly
         await fsPromises.access(filePath);
@@ -16,4 +19,4 @@ const fileExistsByPath = async (fileName: string): Promise<boolean> => {
     }
 };
 
-export { fileExistsByPath };
+export { fileExistsByPath, imagesPath, outDir };
