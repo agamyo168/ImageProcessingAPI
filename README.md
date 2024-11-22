@@ -22,4 +22,5 @@ TypeScript:
 ## TODO:
 
 -   [x] install dependencies
--   [ ] configs
+-   [x] configs
+-   [ ]
