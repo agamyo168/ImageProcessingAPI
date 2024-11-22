@@ -19,8 +19,8 @@ TypeScript:
 `npm install --save-dev @types/jasmine @types/supertest`
 `npm install --save-dev @typescript-eslint/eslint-plugin @typescript-eslint/parser`
 
-## TODO:
+## :
 
--   [x] install dependencies
--   [x] configs
--   [ ]
+[x] install dependencies
+[x] configs
+[ ]

@@ -1,5 +1,7 @@
 import express from 'express';
 import imagesRoute from './routes/images';
+import notFoundMiddleware from './middlewares/not-found';
+import errorHandlerMiddleware from './middlewares/error-handler';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -9,10 +11,8 @@ app.get('/', (req, res) => {
 });
 app.use('/api/v1', imagesRoute);
 
-app.all('*', (req, res) => {
-    res.status(404).send('Oops!');
-});
-
+app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
 const start = async () => {
     app.listen(port, () => {
         console.log(`SERVER IS LISTENING ON PORT http://localhost:${port}....`);
