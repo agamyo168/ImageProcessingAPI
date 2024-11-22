@@ -1,11 +1,11 @@
 import { promises as fsPromises } from 'fs';
 import { join } from 'path';
 
-const imagesPath = join(__dirname, '..', '..', 'public', 'images');
-const outDir = join(imagesPath, 'thumb');
+const imagesDir = join(__dirname, '..', '..', 'public', 'images');
+const outDir = join(imagesDir, 'thumb');
 const fileExistsByPath = async (
     fileName: string,
-    path: string = imagesPath,
+    path: string = imagesDir,
 ): Promise<boolean> => {
     try {
         const filePath = join(path, fileName);
@@ -19,4 +19,4 @@ const fileExistsByPath = async (
     }
 };
 
-export { fileExistsByPath, imagesPath, outDir };
+export { fileExistsByPath, imagesDir, outDir };

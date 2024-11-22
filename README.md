@@ -19,10 +19,24 @@ TypeScript:
 `npm install --save-dev @types/jasmine @types/supertest`
 `npm install --save-dev @typescript-eslint/eslint-plugin @typescript-eslint/parser`
 
-## :
+## Tasks :
+
+### Project:
 
 [x] install dependencies
 [x] configs
 [x] imageProcessingService -> Basic -> Input filename, width, height Output -> string file location.
 [x] API endpoint -> /images?filename=name&width=w&height=h
-[ ] Refactoring, debugging and testing.
+
+### Refactoring, debugging and testing.
+
+[x] Test -> invalid URL.
+[x] Test -> valid image.
+[x] Test -> not providing a query object.
+[x] Test -> given bad filename.
+[x] Test -> given height and width in negative numbers.
+[x] Test -> given bad height and width.
+[ ] Caching an image.
+[ ] Validation Middleware
+[ ] Custom Errors
+[ ] Error Handling Middleware
