@@ -23,20 +23,21 @@ TypeScript:
 
 ### Project:
 
-[x] install dependencies
-[x] configs
-[x] imageProcessingService: Input -> filename, width, height - Output -> string file location.
-[x] API endpoint -> /images?filename=name&width=w&height=h
+-   [x] install dependencies
+-   [x] configs
+-   [x] imageProcessingService: Input -> filename, width, height - Output -> string file location.
+-   [x] API endpoint -> /images?filename=name&width=w&height=h
 
 ### Refactoring, debugging and testing.
 
-[x] Test -> invalid URL.
-[x] Test -> valid image.
-[x] Test -> not providing a query object.
-[x] Test -> given bad filename.
-[x] Test -> given height and width in negative numbers.
-[x] Test -> given bad height and width.
-[x] Error Handling Middleware
-[ ] Custom Errors
-[ ] Caching an image.
-[ ] Validation Middleware
+-   [x] Test -> invalid URL.
+-   [x] Test -> valid image.
+-   [x] Test -> not providing a query object.
+-   [x] Test -> given bad filename.
+-   [x] Test -> given height and width in negative numbers.
+-   [x] Test -> given bad height and width.
+-   [x] Error Handling Middleware.
+-   [x] Custom Errors.
+-   [ ] Refactor imageResize function to return void.
+-   [ ] Caching an image.
+-   [ ] Validation Middleware

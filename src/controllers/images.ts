@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { imageResize } from '../services/imageProcessingService';
-import { fileExistsByPath } from '../util/fileHandler';
+import { fileExistsByPath, imagesDir, outDir } from '../util/fileHandler';
 import BadRequestError from '../Errors/bad-request';
 import NotFoundError from '../Errors/not-found';
+import { join } from 'path';
 
 const getImage = async (req: Request, res: Response, next: NextFunction) => {
     const { width, height, filename } = req.query;
@@ -13,24 +14,31 @@ const getImage = async (req: Request, res: Response, next: NextFunction) => {
         });
         return;
     }
-    //TODO: if filename doesn't exist:
+    //if filename doesn't exist:
     const filename_jpg = filename + '.jpg';
     const isFound = await fileExistsByPath(filename_jpg);
     if (isFound === false) {
         return next(new NotFoundError('No Image'));
     }
 
-    const outputPath = await imageResize(
-        filename_jpg,
-        Number(width),
-        Number(height),
-    );
-    if (outputPath.startsWith('Error:')) {
-        return next(new BadRequestError(outputPath));
-    }
+    //check if the query are not digits
+    const isNotNumber = isNaN(Number(width)) || isNaN(Number(height));
 
-    //TODO: width or height are not a number.
-    //TODO: width or height are in negative number.
+    //Check if a number is not valid
+    const isNotValidSize =
+        Number(height) <= 0 ||
+        Number(width) <= 0 ||
+        !Number.isInteger(height) ||
+        !Number.isInteger(width);
+
+    if (isNotValidSize && isNotNumber)
+        return next(
+            new BadRequestError('Please provide positive integer numbers'),
+        );
+
+    const inputPath = join(imagesDir, filename_jpg);
+    const outputPath = join(outDir, `${width} ${height} ${filename_jpg}`);
+    await imageResize(inputPath, outputPath, Number(width), Number(height));
 
     res.status(StatusCodes.OK).sendFile(outputPath);
 };
